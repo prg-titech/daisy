@@ -1,4 +1,4 @@
-// create workspace
+// create blockly workspace
 var workspace = Blockly.inject("blockly-editor", {
     toolbox: document.getElementById("toolbox"),
     scrollbars: false,
@@ -21,15 +21,14 @@ var workspace = Blockly.inject("blockly-editor", {
     tooloboxOptions: {
         disableAutoClose: true,
     },
-    // toolboxPosition: "end",
 });
 
 // keep the selected toolbox open when dragging blocks
-// workspace.toolbox_.flyout_.autoClose = false;
 workspace.getFlyout().autoClose = false;
 
-// show the input from problem: to info mining section
-// reset selection
+// ---------------------------------------
+
+// show the input from "problem:" to "info-mining" section and/or reset selection
 function showProblem() {
     // erase the previous problem desc in info mining section & erase all keywords added
     var infoMiningArea = document.getElementById("info-mining");
@@ -54,6 +53,8 @@ document.getElementById('delete').addEventListener('change', function(event) {
         deleteKeyword(selectedKeyword);
     }
 });
+
+// ---------------------------------------
 
 // README webpage
 function readme1a() {

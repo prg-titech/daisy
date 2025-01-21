@@ -1,39 +1,3 @@
-// keyword
-Blockly.defineBlocksWithJsonArray([{
-    "type": "keyword",
-    "message0": '%1',
-    "args0": [
-      {
-        "type": "field_input",
-        "name": "keyword",
-        "check": "String"
-      }
-    ],
-    "output": null,
-    "colour": 240,
-}]);
-
-//placebo
-Blockly.defineBlocksWithJsonArray([{
-    "type": "keyword2",
-    "message0": '%1',
-    "args0": [
-      {
-        "type": "field_input",
-        "name": "VALUE",
-        "check": "String"
-      }
-    ],
-    "output": null,
-    "colour": 180,
-}]);
-
-// ---------------------------------------
-
-
-
-// ---------------------------------------
-
 // array of keywords
 var existingKeywords = [];
 
@@ -172,6 +136,3 @@ function deleteKeyword(keyword) {
         updateDeleteKeyword();
     }
 }
-
-
-

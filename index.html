@@ -26,12 +26,10 @@
                 <select id="delete" style="position: absolute; top: 70px; left: 320px;">
                     <option value="">Delete Keyword</option>
                 </select>
-                
             </div>
 
             <div class="info-mining" id="info-mining">
-                <!-- <div id="selector" style="background-color: #EEEEEE; flex-wrap: wrap;"></div> -->
-                
+
             </div>
 
             <!-- <div class="progress" id="progress">
@@ -48,9 +46,7 @@
                     <category name="Information Mining" toolboxitemid="step1a" id="step1a" expanded="true">
                         <label text="Information Mining" web-class="myLabelStyle"></label>
                         <button text="README" callbackKey="readme1a"></button>
-                        <!-- <block type="Statement"></block> -->
-                        <!-- <button text="Add" callbackKey="addKeyword"></button> -->
-                        <!-- <button text="Delete" callbackKey="deleteKeyword"></button> -->
+                        <sep gap="10"></sep>
                         <label text="Keywords"></label>
                         
                     </category>
@@ -103,8 +99,10 @@
             <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
             <script src="https://unpkg.com/blockly/msg/en.js"></script> -->
 
-            <script src="block/step1a.js"></script>
-            <script src="block/step1b.js"></script>
+            <script src="block/keyword.js"></script>
+            <script src="block/data-rep.js"></script>
+            <script src="block/data-ex.js"></script>
+            <script src="action/info-mining.js"></script>
             <script src="main.js"></script>
         </main>
 
