@@ -1,4 +1,4 @@
-// keyword (purple)
+// keyword
 Blockly.defineBlocksWithJsonArray([{
     "type": "keyword",
     "message0": '%1',
@@ -9,7 +9,7 @@ Blockly.defineBlocksWithJsonArray([{
         "check": "String"
       }
     ],
-    "output": null,
+    "output": "keyword",
     "colour": 240,
 }]);
 

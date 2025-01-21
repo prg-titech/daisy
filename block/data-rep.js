@@ -14,7 +14,7 @@ Blockly.defineBlocksWithJsonArray([{
         {
             "type": "input_statement",
             "name": "constructor",
-            "check": ["cons_withArg"]
+            "check": ["cons_withArg", "cons_noArg"]
 
         }
     ],
@@ -28,7 +28,8 @@ Blockly.defineBlocksWithJsonArray([{
     "args0": [
         {
             "type": "input_value",
-            "name": "cons_name"
+            "name": "cons_name",
+            "check": ["keyword"]
         },
         {
             "type": "input_value",
@@ -37,11 +38,13 @@ Blockly.defineBlocksWithJsonArray([{
             "check": ["argument"]
         },
     ],
-    "previousStatement": "cons_withArg",
-    "nextStatement": "cons_withArg",
-    // "output": null,
+    // "mutator": "cons_withArg_mutator",
+    "previousStatement": ["cons_withArg", "cons_noArg"],
+    "nextStatement": ["cons_withArg", "cons_noArg"],
+    // "output": "cons_withArg",
     "colour": 60,
     "inputsInline": true,
+
 }]);
 
 // constructor without arguments (yellow)
@@ -54,8 +57,9 @@ Blockly.defineBlocksWithJsonArray([{
             "name": "cons_name"
         }
     ],
-    "previousStatement": null,
-    "nextStatement": null,
+    "previousStatement": ["cons_withArg", "cons_noArg"],
+    "nextStatement": ["cons_withArg", "cons_noArg"],
+    // "output": "cons_noArg",
     "colour": 60,
     "inputsInline": true,
 }]);
@@ -79,13 +83,11 @@ Blockly.defineBlocksWithJsonArray([{
             "type": "input_value",
             "name": "otherArg",
             "check": ["argument"],
-            "shape": Blockly.INPUT_SHAPE_SQUARE,
         }
     ],
-    "output": "VALUE",
+    "output": "argument",
     "colour": 30,
     "inputsInline": true,
-    "outputShape": Blockly.OUTPUT_SHAPE_SQUARE
 }]);
 
 
