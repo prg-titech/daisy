@@ -1,7 +1,7 @@
-// array of keywords
-var existingKeywords = [];
+var existingKeywords = []; // array of keywords
+var HIGHLIGHT_COLOR = 'rgb(138,150,255)';
 
-// ---------------
+// ---------------------------------------
 // --- add keyword functions --- //
 
 // selector (ver2)
@@ -11,8 +11,8 @@ function selector() {
     // highlight the keyword selected
     if (selObj.rangeCount > 0 && selObj != "") {
         var range = selObj.getRangeAt(0);
-        var span = document.createElement('span');
-        span.style.backgroundColor = 'yellow';
+        var span = document.createElement('keyword');
+        span.style.backgroundColor = HIGHLIGHT_COLOR;
 
         try {
             range.surroundContents(span);
@@ -80,10 +80,12 @@ function updateDeleteKeyword() {
 
 // erase the highlight in info mining area
 function undoHighlight(keyword) {
-    var highlight = document.querySelectorAll('span[style="background-color: yellow;"]');
+    var highlight = document.querySelectorAll('keyword');
     
     highlight.forEach(function(word) {
+        console.log("1Checking span:", word.textContent, word.style.backgroundColor);
         if (word.textContent === keyword) {
+            console.log("1Removing highlight for:", word.textContent);
             var parent = word.parentNode;
             while (word.firstChild) {
                 parent.insertBefore(word.firstChild, word);
