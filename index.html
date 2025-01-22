@@ -20,7 +20,7 @@
 
                 <!-- button -->
                 <button id="show" style="position: absolute; top: 10px; left: 320px;" onclick="showProblem()">Show / Reset</button>
-                <button id="add" style="position: absolute; top: 50px; left: 320px;" onclick="selector()">Add Keyword</button>
+                <button id="add" style="position: absolute; top: 50px; left: 320px;" onclick="addKeyword()">Add Keyword</button>
 
                 <!-- dropdown for deleting keyword -->
                 <select id="delete" style="position: absolute; top: 70px; left: 320px;">
@@ -45,29 +45,39 @@
                 <xml id="toolbox" style="display: none">
                     <category name="Information Mining" toolboxitemid="step1a" id="step1a" expanded="true">
                         <label text="Information Mining" web-class="myLabelStyle"></label>
-                        <button text="README" callbackKey="readme1a"></button>
                         <sep gap="10"></sep>
+                        <button text="?" callbackKey="readme1a"></button>
+                        <!-- <sep gap="10"></sep> -->
                         <label text="Keywords"></label>
+                        <sep gap="10"></sep>
                         
                     </category>
 
                     <category name="Data Representation" id="step1b" expanded="true">
                         <label text="Data Representation" web-class="myLabelStyle"></label>
-                        <button text="README" callbackKey="readme1b"></button>
                         <sep gap="10"></sep>
+                        <button text="?" callbackKey="readme1b"></button>
+                        <!-- <sep gap="10"></sep> -->
                         <label text="Data Definition"></label>
+                        <sep gap="10"></sep>
                         <block type="data_definition"></block>
                         <label text="Constructor (with argument)"></label>
+                        <sep gap="10"></sep>
                         <block type="cons_withArg"></block>
                         <label text="Constructor (without argument)"></label>
+                        <sep gap="10"></sep>
                         <block type="cons_noArg"></block>
                         <label text="Argument"></label>
+                        <sep gap="10"></sep>
                         <block type="argument"></block>
                         <label text="Keyword"></label>
+                        <sep gap="10"></sep>
                     </category>
 
                     <category name="Data Example" id="step1c" expanded="true">
-                        <button text="README" callbackKey="readme1c"></button>
+                        <label text="Data Example" web-class="myLabelStyle"></label>
+                        <sep gap="10"></sep>
+                        <button text="?" callbackKey="readme1c"></button>
                     </category>
                         
 
@@ -94,11 +104,18 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ace.js"></script>
 
             <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+            <!-- add +- feature in block -->
+            <!-- <script src="https://unpkg.com/@blockly/block-plus-minus/dist/index.js"></script>  -->
             <!-- <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
             <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
             <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
             <script src="https://unpkg.com/blockly/msg/en.js"></script> -->
 
+            <script src="block/block-plus-minus/serialization_helper.js"></script>
+            <script src="block/block-plus-minus/field_plus.js"></script>
+            <script src="block/block-plus-minus/field_minus.js"></script>
+
+            <script src="block/cons-mutator.js"></script>
             <script src="block/keyword.js"></script>
             <script src="block/data-rep.js"></script>
             <script src="block/data-ex.js"></script>

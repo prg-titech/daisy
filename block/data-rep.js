@@ -24,21 +24,22 @@ Blockly.defineBlocksWithJsonArray([{
 // constructor with arguments (yellow)
 Blockly.defineBlocksWithJsonArray([{
     "type": "cons_withArg",
-    "message0": '%1 has %2',
+    "message0": '%1 has',
     "args0": [
         {
             "type": "input_value",
             "name": "cons_name",
             "check": ["keyword"]
         },
-        {
-            "type": "input_value",
-            "name": "argument",
-            // "shape": Blockly.INPUT_SHAPE_SQUARE,
-            "check": ["argument"]
-        },
+        // {
+        //     "type": "input_value",
+        //     "name": "argument",
+        //     // "shape": Blockly.INPUT_SHAPE_SQUARE,
+        //     "check": ["argument"],
+        //     // "mutator": "text_join_mutator",
+        // },
     ],
-    // "mutator": "cons_withArg_mutator",
+    "mutator": "cons_mutator",
     "previousStatement": ["cons_withArg", "cons_noArg"],
     "nextStatement": ["cons_withArg", "cons_noArg"],
     // "output": "cons_withArg",
@@ -54,7 +55,8 @@ Blockly.defineBlocksWithJsonArray([{
     "args0": [
         {
             "type": "input_value",
-            "name": "cons_name"
+            "name": "cons_name",
+            "check": ["keyword"]
         }
     ],
     "previousStatement": ["cons_withArg", "cons_noArg"],
@@ -67,7 +69,7 @@ Blockly.defineBlocksWithJsonArray([{
 // argument (orange)
 Blockly.defineBlocksWithJsonArray([{
     "type": "argument",
-    "message0": '%1 of type %2 %3',
+    "message0": '%1 of type %2',
     "args0": [
         {
             "type": "input_value",
@@ -79,15 +81,17 @@ Blockly.defineBlocksWithJsonArray([{
             "name": "datatype",
             "check": ["keyword"]
         },
-        {
-            "type": "input_value",
-            "name": "otherArg",
-            "check": ["argument"],
-        }
+        // {
+        //     "type": "input_value",
+        //     "name": "otherArg",
+        //     "check": ["argument"],
+        // }
     ],
     "output": "argument",
     "colour": 30,
     "inputsInline": true,
 }]);
+
+//---------------------------------------
 
 

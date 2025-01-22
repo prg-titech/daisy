@@ -4,8 +4,9 @@ var HIGHLIGHT_COLOR = 'rgb(138,150,255)';
 // ---------------------------------------
 // --- add keyword functions --- //
 
-// selector (ver2)
-function selector() {
+// add keyword (selector method)
+function addKeyword() {
+    // get the selected text
     var selObj = document.getSelection();
 
     // highlight the keyword selected
@@ -23,11 +24,13 @@ function selector() {
 
         // make a block out of the keyword
         var selectedKeyword = selObj.toString();
-        console.log(selectedKeyword);
         newKeyword(selectedKeyword);
 
-    } else {
-        addKeyword();
+    } 
+    // if no text selected
+    else {
+        var keyword = prompt("Enter new keyword");
+        newKeyword(keyword);
     }
 }
 
@@ -40,7 +43,10 @@ function newKeyword(keyword) {
 
         var category1a = document.getElementById("step1a");
         var category1b = document.getElementById("step1b");
-        var newXML = '<block type="keyword"><field name="keyword">' + keyword + '</field></block>';
+        var newXML = 
+            // '<block type="keyword"><field name="keyword">' + keyword + '</field></block>';
+            `<block type="keyword"><field name="keyword">${keyword}</field></block>
+            <sep gap="5"></sep>`;
         
         // add xml block to step1a and step1b
         category1a.innerHTML += newXML;
@@ -48,6 +54,7 @@ function newKeyword(keyword) {
 
         workspace.updateToolbox(document.getElementById("toolbox"));
 
+        console.log("Keyword added:", keyword);
         alert("Keyword \"" + keyword + "\" added");
         updateDeleteKeyword();
 
@@ -56,14 +63,8 @@ function newKeyword(keyword) {
     }
 }
 
-// create new block based on input keyword
-function addKeyword() {
-    var keyword = prompt("Enter new keyword");
-    newKeyword(keyword)
-};
 
-
-// ---------------
+// ---------------------------------------
 // --- delete keyword functions --- //
  
 // Function to update the Deletedropdown menu with existing keywords
@@ -83,9 +84,7 @@ function undoHighlight(keyword) {
     var highlight = document.querySelectorAll('keyword');
     
     highlight.forEach(function(word) {
-        console.log("1Checking span:", word.textContent, word.style.backgroundColor);
         if (word.textContent === keyword) {
-            console.log("1Removing highlight for:", word.textContent);
             var parent = word.parentNode;
             while (word.firstChild) {
                 parent.insertBefore(word.firstChild, word);
@@ -101,10 +100,8 @@ function deleteAux(step, keyword) {
     var blocks = category.getElementsByTagName("block");
     for (var i = 0; i < blocks.length; i++) {
         var field = blocks[i].getElementsByTagName("field")[0];
-        console.log("Checking block:", blocks[i], "with field:", field);
         if (field && field.textContent == keyword) {
             category.removeChild(blocks[i]);
-            console.log("Removing block:", blocks[i]);
             workspace.updateToolbox(document.getElementById("toolbox"));
             break;
         }
@@ -124,7 +121,7 @@ function deleteKeyword(keyword) {
     // var keyword = prompt("Enter keyword to delete");
     if (keyword != null) {
         // remove keyword from array
-        existingKeywords.pop(keyword);
+        existingKeywords = existingKeywords.filter(item => item !== keyword);
 
         // remove highlight in "info-mining" area
         undoHighlight(keyword);
@@ -133,6 +130,7 @@ function deleteKeyword(keyword) {
         deleteAux("step1a", keyword);
         deleteAux("step1b", keyword);
 
+        console.log("Keyword deleted:", keyword);
         alert("Keyword \"" + keyword + "\" deleted");
 
         updateDeleteKeyword();

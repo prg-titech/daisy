@@ -44,6 +44,13 @@ function showProblem() {
 
     // append "problem" to info-mining
     infoMiningArea.appendChild(paragraph);
+
+    // delete existing keywords
+    existingKeywords = [];
+    updateDeleteKeyword();
+
+    // log
+    console.log("Reset");
 }
 
 // Event listener for the "Delete Keyword" dropdown menu
