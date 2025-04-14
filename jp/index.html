@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Daisy: 情報のモデル化を学習するためのブロック演習環境</title>
+        <link rel="stylesheet" href="styles/index.css" />
+    </head>  
+
+    <body>
+        <header>
+            <h1>Daisy</h1>
+        </header>
+
+
+        <main>
+            <div class="problem-desc">
+                <!-- problem description -->
+                <p>問題文: </p>
+                <textarea type="text" id="fillbox" placeholder="問題文をここに入力する。" class="fillbox"></textarea>
+
+                <!-- button -->
+                <button id="show" style="position: absolute; top: 10px; left: 320px;" onclick="showProblem()">問題文を表示</button>
+                <button id="add" style="position: absolute; top: 50px; left: 320px;" onclick="addKeyword()">キーワード追加</button>
+
+                <!-- dropdown for deleting keyword -->
+                <select id="delete" style="position: absolute; top: 70px; left: 320px;">
+                    <option value="">キーワード削除</option>
+                </select>
+            </div>
+
+            <div class="info-mining" id="info-mining">
+
+            </div>
+
+            <!-- <div class="progress" id="progress">
+                <p id="prog-infomining" style="left: 100px;">Information Mining</p>
+                <p id="prog-datarep" style="left: 400px;">Data Representation</p>
+                <p id="prog-dataex" style="left: 700px;">Data Example</p>
+
+                <button id="next" style="position: absolute; top: 15px; left: 1200px;" onclick="next()">Next</button>
+                <button id="showCode" style="position: absolute; top: 15px; left: 1050px;" onclick="showCode()">Show Text Code</button>
+            </div> -->
+    
+            <div class="blockly-editor" id="blockly-editor">
+                <xml id="toolbox" style="display: none">
+                    <category name="情報マイニング" toolboxitemid="step1a" id="step1a" expanded="true">
+                        <label text="情報マイニング" web-class="header-font"></label>
+                        <sep gap="10"></sep>
+                        <!-- <button text="?" callbackKey="readme1a"></button> -->
+                        <!-- <sep gap="10"></sep> -->
+                        <label text="キーワード"></label>
+                        <sep gap="10"></sep>
+                    </category>
+
+                    <category name="データ表現" id="step1b" expanded="true">
+                        <label text="データ表現" web-class="myLabelStyle"></label>
+                        <sep gap="10"></sep>
+
+                        <!-- <button text="?" callbackKey="readme1b"></button> -->
+                        <button text="次のステップ" callbackKey="make_step1c"></button> 
+                        
+                        <label text="データ定義"></label>
+                        <sep gap="0"></sep>
+                        <block type="data_definition"></block>
+
+                        <label text="コンストラクタ（引数あり）"></label>
+                        <sep gap="0"></sep>
+                        <block type="cons_withArg"></block>
+
+                        <label text="コンストラクタ（引数なし）"></label>
+                        <sep gap="0"></sep>
+                        <block type="cons_noArg"></block>
+
+                        <label text="引数"></label>
+                        <sep gap="0"></sep>
+                        <block type="argument"></block>
+
+                        <label text="プリミティブのデータ型"></label>
+                        <sep gap="0"></sep>
+                        <block type="pd-int"></block>
+                        <sep gap="5"></sep>
+                        <block type="pd-string"></block>
+                        <sep gap="5"></sep>
+                        <block type="pd-boolean"></block>
+
+                        <label text="キーワード"></label>
+                        <sep gap="0"></sep>
+                    </category>
+
+                    <category name="データ例作成" id="step1c" hidden="true" expanded="false">
+                        <label text="データ例作成" web-class="myLabelStyle"></label>
+                        <sep gap="10"></sep>
+                        <!-- <button text="?" callbackKey="readme1c"></button> -->
+
+                    </category>
+                        
+
+                    <!-- <category name="Data Representation" id="step1b" hidden="true"></category>
+                    <category name="Data Example" id="step1c" hidden="true"></category> -->
+                </xml>
+            </div>
+
+            <!-- <div class="text-editor" id="text-editor"> -->
+
+            <!-- </div> -->
+    
+            
+
+
+
+
+
+
+
+            <!-- <div class="feedback" id="feedback"></div> -->
+            
+            <!-- for text editor  -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.9.6/ace.js"></script>
+
+            <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+            <!-- add +- feature in block -->
+            <!-- <script src="https://unpkg.com/@blockly/block-plus-minus/dist/index.js"></script>  -->
+            <!-- <script src="https://unpkg.com/blockly/blockly_compressed.js"></script>
+            <script src="https://unpkg.com/blockly/blocks_compressed.js"></script>
+            <script src="https://unpkg.com/blockly/javascript_compressed.js"></script>
+            <script src="https://unpkg.com/blockly/msg/en.js"></script> -->
+
+            <script src="block/block-plus-minus/serialization_helper.js"></script>
+            <script src="block/block-plus-minus/field_plus.js"></script>
+            <script src="block/block-plus-minus/field_minus.js"></script>
+
+            <script src="block/cons-mutator.js"></script>
+            <script src="block/keyword.js"></script>
+            <script src="block/data-rep.js"></script>
+            <script src="block/data-ex.js"></script>
+
+            <script src="action/info-mining.js"></script>
+            <script src="action/data-ex.js"></script>
+
+            <script src="main.js"></script>
+        </main>
+
+
+
+
+    </body>
+</html>
