@@ -1,0 +1,165 @@
+main {
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-x: scroll;
+    height: 650px;
+    background-color: #f7fafc;
+}
+
+/* header */
+header {
+  background: linear-gradient(to right, #FFF9C4, #FFEB3B);
+  width: 100%;
+  height: 50px;
+}
+
+h1 {
+  width: 400px;
+  /* height: 50px; */
+  position: relative;
+  margin: 0;
+  color: rgb(16, 127, 1);
+  font-size: 1.5em;
+  line-height: 2em;
+  font-family: sans-serif;
+  text-align: left;
+}
+
+/* main  */
+.problem-desc {
+  top: 0px;
+  left: 0px;
+  height: 100px; 
+  width: 450px; 
+  background-color: rgb(200,200,200);
+}
+
+.problem-desc p {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  color: black;
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+.fillbox {
+  position: absolute;
+  top: 10px;
+  left: 100px;
+  width: 200px;
+  height: 70px;
+  padding: 4px;
+  resize: none; 
+  overflow: hidden; 
+  white-space: pre-wrap; 
+  word-wrap: break-word; 
+  word-break: break-all;
+  font-family: sans-serif; 
+  font-size: 0.8em;
+
+}
+
+.info-mining {
+  position: absolute;
+  top: 0px;
+  left: 450px;
+  height: 100px; 
+  width: 820px; 
+  background-color: rgb(255,255,255);
+  overflow-y: auto;
+  font-family: sans-serif; 
+}
+
+.info-mining p {
+  position: absolute;
+  top: 0px;
+  left: 20px;
+  color: black;
+  font-size: 1em;
+  font-family: sans-serif; 
+}
+
+.progress {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  height: 50px; 
+  width: 100%; 
+  background-color: rgb(240,240,240);
+}
+
+.progress p {
+  position: absolute;
+  top: -10px;
+  color: black;
+  /* font-size: 1em; */
+  font-family: sans-serif;
+}
+
+.blockly-editor {
+  position: absolute;
+  top: 100px;
+  left: 0px;
+  /* transition: left 0.4s; */
+  height: 500px;
+  width: 100%;
+  background-color: #eee;
+}
+
+.header-font {
+  font-size: 40px;
+}
+
+/* make README button for each step */
+.blocklyTreeRow .blocklyTreeLabel {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.blocklyTreeRow .category-button {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  padding: 2px 5px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.blocklyTreeRow .category-button:hover {
+  background-color: #45a049;
+}
+
+/* ---  */
+
+.text-editor {
+  position: absolute;
+  top: 150px;
+  left: 900px;
+  height: 500px; 
+  width: 350px; 
+  background-color: rgb(37, 37, 37)
+}
+
+/* .feedback {
+  position: absolute;
+  top: 350px;
+  left: 900px;
+  height: 250px; 
+  width: 400px; 
+  background-color: rgb(103, 103, 103)
+} */
+
+/* ------------- */
+
+/* Information Mining (1a) */
+
+
+
+/* ------------- */
+
