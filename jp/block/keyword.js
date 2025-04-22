@@ -13,5 +13,10 @@ Blockly.defineBlocksWithJsonArray([{
     "colour": 240,
 }]);
 
+// read keyword's 内容
+Blockly.JavaScript["keyword"] = function (block) {
+  let keyword = block.getFieldValue('keyword');
+  return keyword;
+};
 
 

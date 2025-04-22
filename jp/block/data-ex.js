@@ -1,45 +1,60 @@
-Blockly.defineBlocksWithJsonArray([
-    {
-        "type": "specific_arg",
-        "message0": '%1',
-        "args0": [
+function build_dataExWithNoArg(n, consName) {
+    Blockly.defineBlocksWithJsonArray([
+        {
+          "type": `data_ex${n}`,
+          "message0": `%1 = ${consName}`,
+          "args0": [
             {
-                "type": "field_input",
-                "name": "specific_arg_value",
-            },
-        ],
-        "output": "VALUE_example",
-        "colour": 0,
-        "tooltip": "arg",
-        
+              "type": "field_input",
+              "name": "dataExName",
+              "check": "String"
+            }
+          ],
+          "colour": 0,
+          "previousStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
+          "nextStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
+          "inputsInline": true,
+        }
+    ]);
+}
+
+function build_dataExWithArg(n, consName, argList) {
+    // var message = `%1 は`;
+    var message = `%1 = ${consName}(`;
+    var arg = [{
+        "type": "field_input",
+        "name": "dataExName",
+        "check": "String",
+        // "text": `(${consName}のデータ例)`
+    },];
+
+    for (let i = 0; i < argList.length; i++) {
+        if (i > 0) message += ", ";
+        // message += `${argList[i]} %${i+2}`;
+        message += `%${i+2}`;
+        arg.push({
+            "type": "field_input",
+            "name": `argName${i}`,
+            "check": "String",
+            // "text": `(${argList[i]})`
+          })
     }
-]);
 
-// Blockly.JavaScript["specific_arg"] = function (block) {
-//     return block.getFieldValue("specific_arg_value");
-// };
+    // message += `を持つ${consName}です。`;
+    message += ")";
 
-Blockly.defineBlocksWithJsonArray([
-    {
-        "type": "example_name",
-        "message0": '名前 %1 %2',
-        "args0": [
-            {
-                "type": "field_input",
-                "name": "example_name",
-            },
-            {
-                "type": "input_value",
-                "name": "example",
-            },
-        ],
-      
-        "colour": 40,
-        "tooltip": "example_namme",
-        
-    }
-]);
 
-// Blockly.JavaScript["example_namme"] = function (block) {
-//     return block.getFieldValue("example_namme");
-// };
+
+    Blockly.defineBlocksWithJsonArray([
+        {
+          "type": `data_ex${n}`,
+          "message0": message,
+          "args0": arg,
+          "colour": 0,
+          "previousStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
+          "nextStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
+          "inputsInline": true,
+        }
+    ]);
+}
+

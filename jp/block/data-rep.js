@@ -81,11 +81,6 @@ Blockly.defineBlocksWithJsonArray([{
             "name": "datatype",
             "check": ["keyword", "primitive-data"]
         },
-        // {
-        //     "type": "input_value",
-        //     "name": "otherArg",
-        //     "check": ["argument"],
-        // }
     ],
     "output": "argument",
     "colour": 30,

@@ -29,7 +29,7 @@ function addKeyword() {
     } 
     // if no text selected
     else {
-        var keyword = prompt("Enter new keyword");
+        var keyword = prompt("新しいキーワードを入力してください：");
         newKeyword(keyword);
     }
 }
