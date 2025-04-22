@@ -83,9 +83,6 @@ workspace.registerButtonCallback('readme1a', readme1a);
 workspace.registerButtonCallback('readme1b', readme1b);
 workspace.registerButtonCallback('readme1c', readme1c);
 
-// call データ例作成
-workspace.registerButtonCallback('make_step1c', make_step1c);
-
 // ---------------------------------------
 
 // // write code in text-editor
