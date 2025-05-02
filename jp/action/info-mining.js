@@ -15,6 +15,7 @@ function addKeyword() {
         var span = document.createElement('keyword');
         span.style.backgroundColor = HIGHLIGHT_COLOR;
 
+        // 20250502: this try catch never works
         try {
             range.surroundContents(span);
         } catch (error) {
@@ -24,20 +25,23 @@ function addKeyword() {
 
         // make a block out of the keyword
         var selectedKeyword = selObj.toString();
-        newKeyword(selectedKeyword);
+        createKeyword(selectedKeyword);
 
     } 
     // if no text selected
     else {
         var keyword = prompt("新しいキーワードを入力してください：");
-        newKeyword(keyword);
+        createKeyword(keyword);
     }
 }
 
 // inesrt keyword to array and create block
-// 20250112 TODO: improve the function name
-function newKeyword(keyword) {
-    if (keyword != null && !existingKeywords.includes(keyword)) {
+function createKeyword(keyword) {
+    if (existingKeywords.includes(keyword)) {
+        alert("【注意】キーワード「" + keyword + "」はすでに存在します。");
+    } else if (keyword == "" || keyword == null) {
+        alert("【注意】キーワードを入力してください。");
+    } else {
         // add keyword to the array
         existingKeywords.push(keyword);
 
@@ -55,11 +59,9 @@ function newKeyword(keyword) {
         workspace.updateToolbox(document.getElementById("toolbox"));
 
         console.log("Keyword added:", keyword);
-        alert("Keyword \"" + keyword + "\" added");
+        alert("キーワード「" + keyword + "」を追加しました。");
         updateDeleteKeyword();
 
-    } else {
-        alert("Keyword \"" + keyword + "\" already exists");
     }
 }
 
@@ -131,7 +133,7 @@ function deleteKeyword(keyword) {
         deleteAux("step1b", keyword);
 
         console.log("Keyword deleted:", keyword);
-        alert("Keyword \"" + keyword + "\" deleted");
+        alert("キーワード「" + keyword + "」を削除しました。");
 
         updateDeleteKeyword();
     }
