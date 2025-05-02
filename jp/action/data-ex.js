@@ -26,7 +26,15 @@ function make_step1c() {
             // make data example block (red)
             build_dataExWithNoArg(ex_block_n, consName);
 
-            data_ex += `<block type=data_ex${ex_block_n}></block><sep gap="10"></sep>`;
+            data_ex += `
+            <block type=data_ex${ex_block_n}>
+                <value name = "consName">
+                    <block type="cons_name">
+                        <field name="cons_name">${consName}</field>
+                    </block>
+                </value>
+            </block>
+            <sep gap="10"></sep>`;
 
             ex_block_n++;
         }
@@ -67,7 +75,12 @@ function make_step1c() {
             // make data example block (red)
             build_dataExWithArg(ex_block_n, consName, argList);
     
-            data_ex += `<block type=data_ex${ex_block_n}></block><sep gap="10"></sep>`;
+            data_ex += `<block type=data_ex${ex_block_n}>`;
+            data_ex += insertNameBlock(ex_block_n, consName, argList);
+            data_ex += `
+            </block>
+            <sep gap="10"></sep>
+            `;
     
             ex_block_n++;
         }

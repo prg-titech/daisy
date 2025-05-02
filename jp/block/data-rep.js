@@ -104,6 +104,14 @@ Blockly.defineBlocksWithJsonArray([{
     "colour": 220,
 }]);
 
+// double
+Blockly.defineBlocksWithJsonArray([{
+    "type": "pd-double",
+    "message0": 'Double',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
 // boolean
 Blockly.defineBlocksWithJsonArray([{
     "type": "pd-boolean",
