@@ -1,9 +1,14 @@
+// array that consist data_ex0, data_ex1, data_ex2, ..., "arg_value"
+var dataExArray = Array.from({ length: 999 }, (_, i) => `data_ex${i}`);
+dataExArray.push("arg_value");
+
 // define constructor name block
 Blockly.defineBlocksWithJsonArray([{
   "type": "cons_name",
   "message0": '%1',
   "args0": [
     {
+      // "type": "field_label",
       "type": "field_input",
       "name": "cons_name",
       "check": "String"
@@ -19,6 +24,7 @@ Blockly.defineBlocksWithJsonArray([{
   "message0": '%1',
   "args0": [
     {
+      // "type": "field_label",
       "type": "field_input",
       "name": "arg_name",
       "check": "String"
@@ -28,54 +34,79 @@ Blockly.defineBlocksWithJsonArray([{
   "colour": 30,
 }]);
 
+// make block contains variable name and data example block
+Blockly.defineBlocksWithJsonArray([{
+  "type": "data_example",
+  "message0": '%1 は %2',
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "variable",
+      "check": "String",
+      "text": "(変数名)",
+    },
+    {
+      "type": "input_value",
+      "name": "data_ex",
+      "check": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
+    }
+  ],
+  "colour": 0,
+  "previousStatement": "data_example",
+  "nextStatement": "data_example",
+  "inputsInline": true,
+}]);
+
+// argument's value block
+Blockly.defineBlocksWithJsonArray([{
+  "type": "arg_value",
+  "message0": '%1',
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "arg_value",
+      "check": "String",
+      "text": "(引数の値)",
+    }
+  ],
+  "output": "arg_value",
+  "colour": 0,
+}]);
+
 // -----------------
+
+
 
 // build data example block
 function build_dataExWithNoArg(n, consName) {
     Blockly.defineBlocksWithJsonArray([
         {
           "type": `data_ex${n}`,
-          "message0": `%1 は %2`,
+          "message0": `%1`,
           "args0": [
-            {
-              "type": "field_input",
-              "name": "dataExName",
-              "check": "String"
-            },
             {
               "type": "input_value",
               "name": "consName",
               "check": "cons_name",
             }
           ],
+          "output": `data_ex${n}`,
           "colour": 0,
-          "previousStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
-          "nextStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
           "inputsInline": true,
         }
     ]);
 }
 
 function build_dataExWithArg(n, consName, argList) {
-    // for every element in argList, make a block of it
-
-  
-    var message = `%1 は`;
-    // var message = `%1 = ${consName}(`;
-    var arg = [{
-        "type": "field_input",
-        "name": "dataExName",
-        "check": "String",
-        // "text": `(${consName}のデータ例)`
-    },];
+    var message = ``;
+    var arg = [];
 
     for (let i = 0; i < argList.length; i++) {
         if (i > 0) message += ", ";
 
-        var argNameNum = 2 * (i + 1);
-        var argInputNum = 2 * (i + 1) + 1;
-        message += `%${argNameNum}が%${argInputNum}`;
-        // message += `%${i+2}`;
+        var argNameNum = 2 * (i + 1) - 1;
+        var argValueNum = 2 * (i + 1);
+        message += `%${argNameNum}が%${argValueNum}`;
         
         arg.push({
           // arg name
@@ -85,17 +116,16 @@ function build_dataExWithArg(n, consName, argList) {
         },
         // arg input
         {
-          "type": "field_input",
-          "name": `argInput${i}`,
-          "check": "String",
-          // "text": `(${argList[i]})`
+          "type": "input_value",
+          "name": `argValue${i}`,
+          "check": dataExArray,
         }
       )
     }
 
     // field for constructor name
-    var consNameNum = 2 * (argList.length + 1);
-    message += `を持つ%${consNameNum}`;
+    var consNameNum = 2 * (argList.length + 1) - 1;
+    message += `の持つ%${consNameNum}`;
     arg.push({
         "type": "input_value",
         "name": "consName",
@@ -109,9 +139,8 @@ function build_dataExWithArg(n, consName, argList) {
           "type": `data_ex${n}`,
           "message0": message,
           "args0": arg,
+          "output": `data_ex${n}`,
           "colour": 0,
-          "previousStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
-          "nextStatement": Array.from({ length: 999 }, (_, i) => `data_ex${i}`),
           "inputsInline": true,
         }
     ]);
@@ -143,44 +172,3 @@ function insertNameBlock(n, consName, argList) {
 
 
 // ----------
-
-// function insertNameBlock(n, consName, argList) {
-//   const blocks = workspace.getBlocksByType(`data_ex${n}`);
-//   block = blocks[0];
-//   console.log(blocks);
-//   console.log(block);
-
-//   // insert constructor name block
-//   const consNameBlock = workspace.newBlock("keyword");
-//   consNameBlock.initSvg();
-//   consNameBlock.setColour(60);
-//   consNameBlock.setFieldValue(consName, "keyword");
-//   consNameBlock.render();
-
-  
-//   // Connect the constructor name block to the input_value slot
-//   console.log(block.getInput("consName"));
-//   const consNameInputConnection = block.getInput("consName").connection;
-//   if (consNameInputConnection && consNameBlock.outputConnection) {
-//       consNameInputConnection.connect(consNameBlock.outputConnection);
-//   }
-
-
-//   // ----------
-//   // insert argument name blocks
-//   for (let i = 0; i < argList.length; i++) {
-//     const argNameBlock = workspace.newBlock("keyword");
-//     argNameBlock.initSvg();
-//     argNameBlock.setColour(30);
-//     argNameBlock.setFieldValue(argList[i], "keyword");
-//     argNameBlock.render();
-
-//     // Connect the argument name block to the input_value slot
-//     const argNameInputConnection = block.getInput(`argName${i}`).connection;
-//     if (argNameInputConnection && argNameBlock.outputConnection) {
-//         argNameInputConnection.connect(argNameBlock.outputConnection);
-//     }
-//   }
-
-// }
-

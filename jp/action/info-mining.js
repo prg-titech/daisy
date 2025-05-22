@@ -27,11 +27,16 @@ function addKeyword() {
         var selectedKeyword = selObj.toString();
         createKeyword(selectedKeyword);
 
+        // log
+        console.log("Keyword selected: ", selectedKeyword);
+
     } 
     // if no text selected
     else {
         var keyword = prompt("新しいキーワードを入力してください：");
         createKeyword(keyword);
+        // log
+        console.log("Keyword added: ", keyword);
     }
 }
 
@@ -58,7 +63,6 @@ function createKeyword(keyword) {
 
         workspace.updateToolbox(document.getElementById("toolbox"));
 
-        console.log("Keyword added:", keyword);
         alert("キーワード「" + keyword + "」を追加しました。");
         updateDeleteKeyword();
 

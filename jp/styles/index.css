@@ -67,7 +67,7 @@ h1 {
   top: 0px;
   left: 450px;
   height: 100px; 
-  width: 820px; 
+  width: 710px; 
   background-color: rgb(255,255,255);
   overflow-y: auto;
   font-family: sans-serif; 
@@ -109,8 +109,9 @@ h1 {
   background-color: #eee;
 }
 
-.header-font {
-  font-size: 40px;
+.blocklyFlyoutLabel.header-font>.blocklyFlyoutLabelText{
+  font-weight: 700;
+  font-size: 24px;
 }
 
 /* make README button for each step */

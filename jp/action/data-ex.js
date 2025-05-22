@@ -1,3 +1,6 @@
+var consList = [];
+var argList = [];
+
 function make_step1c() {
     data_ex = "";
     template_ex = "";
@@ -8,7 +11,7 @@ function make_step1c() {
     if (workspace.getBlocksByType("data_definition", false).length > 0) {
 
         var ex_block_n = 0;
-        var consList = [];
+        // var consList = [];
 
         // for cons_NoArg
         for (const consNoArgBlock of workspace.getBlocksByType("cons_noArg")) {
@@ -53,7 +56,7 @@ function make_step1c() {
             consList.push(consName);
 
             // record arguments for each constructor
-            var argList = [];
+            // var argList = [];
 
             for (let i = 0; i < 10; i++) {
                 try {
@@ -87,8 +90,22 @@ function make_step1c() {
     }
 
     if(workspace.getBlocksByType("data_definition", false).length > 0){
-        document.getElementById("step1c").innerHTML = '<label text="データ例の作成" web-class="myLabelStyle"></label><sep gap="10"></sep>'+ 
-        '<sep gap="10"></sep>' +  data_ex + '<sep  gap="100"></sep>';
+        document.getElementById("step1c").innerHTML = `
+            <label text="データ例作成" web-class="header-font"></label>
+            <sep gap="10"></sep>
+            <button text="確認" callbackKey="checkStep1c"></button>
+
+            <label text="データ例に変数名をつけるため"></label>
+            <sep gap="0"></sep>
+            <block type="data_example"></block>
+            
+            <label text="引数の値"></label>
+            <sep gap="0"></sep>
+            <block type="arg_value"></block>
+            
+            <label text="データ型から作ったデータ例の雛形"></label>
+            <sep gap="0"></sep>
+        ` + data_ex;
         
         document.getElementById("step1c").hidden = "false";
         workspace.updateToolbox(document.getElementById("toolbox"));
