@@ -26,6 +26,9 @@
                 <select id="delete" style="position: absolute; top: 70px; left: 320px;">
                     <option value="">キーワード削除</option>
                 </select>
+
+                <!-- download button -->
+                <button id="download" style="position: absolute; top: 10px; left: 1180px;" onclick="saveAs()">保存</button>
             </div>
 
             <div class="info-mining" id="info-mining">
@@ -43,7 +46,7 @@
     
             <div class="blockly-editor" id="blockly-editor">
                 <xml id="toolbox" style="display: none">
-                    <category name="情報マイニング" toolboxitemid="step1a" id="step1a" expanded="true">
+                    <category name="情報マイニング" toolboxitemid="step1a" id="step1a" expanded="true" >
                         <label text="情報マイニング" web-class="header-font"></label>
                         <sep gap="10"></sep>
                         <!-- <button text="?" callbackKey="readme1a"></button> -->
@@ -53,7 +56,7 @@
                     </category>
 
                     <category name="データ表現" id="step1b" expanded="true">
-                        <label text="データ表現" web-class="myLabelStyle"></label>
+                        <label text="データ表現" web-class="header-font"></label>
                         <sep gap="10"></sep>
 
                         <!-- <button text="?" callbackKey="readme1b"></button> -->
@@ -84,21 +87,32 @@
                         <block type="pd-string"></block>
                         <sep gap="5"></sep>
                         <block type="pd-boolean"></block>
+                        <!-- <sep gap="5"></sep> -->
+                        <!-- <block type="primitive-data">
+                            <field name="primitive-data">Int---</field>
+                        </block> -->
 
                         <label text="キーワード"></label>
                         <sep gap="0"></sep>
                     </category>
 
                     <category name="データ例作成" id="step1c" hidden="true" expanded="false">
-                        <label text="データ例作成" web-class="myLabelStyle"></label>
+                        <label text="データ例作成" web-class="header-font"></label>
                         <sep gap="10"></sep>
                         <!-- <button text="?" callbackKey="readme1c"></button> -->
 
-                    </category>
+                        <label text="データ例に変数名をつけるため"></label>
+                        <sep gap="0"></sep>
+                        <block type="data_example"></block>
                         
+                        <label text="引数の値"></label>
+                        <sep gap="0"></sep>
+                        <block type="arg_value"></block>
+                        
+                        <label text="データ型から作ったデータ例の雛形"></label>
+                        <sep gap="0"></sep>
 
-                    <!-- <category name="Data Representation" id="step1b" hidden="true"></category>
-                    <category name="Data Example" id="step1c" hidden="true"></category> -->
+                    </category>
                 </xml>
             </div>
 
@@ -143,9 +157,5 @@
 
             <script src="main.js"></script>
         </main>
-
-
-
-
     </body>
 </html>

@@ -1,7 +1,7 @@
 // create blockly workspace
 var workspace = Blockly.inject("blockly-editor", {
     toolbox: document.getElementById("toolbox"),
-    scrollbars: false,
+    scrollbars: true,
     horizontalLayout: false,
     zoom: {
         controls: true,
@@ -18,13 +18,17 @@ var workspace = Blockly.inject("blockly-editor", {
         colour: "#ddd",
         snap: true
     },
-    tooloboxOptions: {
-        disableAutoClose: true,
-    },
+    // toolboxOptions: {
+    //     disableAutoClose: true,
+    // },
 });
 
 // keep the selected toolbox open when dragging blocks
-workspace.getFlyout().autoClose = false;
+// workspace.getFlyout().autoClose = false;
+workspace.getToolbox().getFlyout().autoClose = false;
+// workspace.toolbox_.flyout_.autoClose = false;
+
+
 
 // ---------------------------------------
 
@@ -66,6 +70,11 @@ document.getElementById('delete').addEventListener('change', function(event) {
 // call step 1c
 workspace.registerButtonCallback("make_step1c", make_step1c);
 
+// check step 1c
+workspace.registerButtonCallback("checkStep1c", checkStep1c);
+
+// ---------------------------------------
+
 // README webpage
 function readme1a() {
     // window.location.href = 
@@ -82,6 +91,29 @@ function readme1c() {
 workspace.registerButtonCallback('readme1a', readme1a);
 workspace.registerButtonCallback('readme1b', readme1b);
 workspace.registerButtonCallback('readme1c', readme1c);
+
+// download files
+function downloadFiles(content, fileName) {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+
+// save button
+function saveAs(){
+    user = window.prompt("保存するファイル名を入力してください", "");
+      if(user != ""){
+      var xml = Blockly.Xml.workspaceToDom(workspace);
+      var myBlockXml = Blockly.Xml.domToText(xml);
+      downloadFiles(myBlockXml,user+".txt")
+    }
+  }
 
 // ---------------------------------------
 

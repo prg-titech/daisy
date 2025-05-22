@@ -21,6 +21,14 @@ Blockly.defineBlocksWithJsonArray([{
     "colour": 160,
   }]);
 
+Blockly.JavaScript["define_data"] = function (block) {
+    
+    let data_name = block.getFieldValue("define_dataName");
+    let cases = Blockly.JavaScript.statementToCode(block, "case")
+    let space_cut_cases = cases.replace(/  case/g, "case")
+    return "abstract class " +  data_name + "\n" + space_cut_cases;
+};
+
 // constructor with arguments (yellow)
 Blockly.defineBlocksWithJsonArray([{
     "type": "cons_withArg",
@@ -116,6 +124,21 @@ Blockly.defineBlocksWithJsonArray([{
 Blockly.defineBlocksWithJsonArray([{
     "type": "pd-boolean",
     "message0": 'Boolean',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
+// primitive data type block
+Blockly.defineBlocksWithJsonArray([{
+    "type": "primitive-data",
+    "message0": '%1',
+    "args0": [
+        {
+          "type": "field_label",
+          "name": "primitive-data",
+          "check": "String"
+        }
+      ],
     "output": "primitive-data",
     "colour": 220,
 }]);

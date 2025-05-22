@@ -5,6 +5,7 @@ Blockly.defineBlocksWithJsonArray([{
     "args0": [
       {
         "type": "field_input",
+        // "type": "field_label",
         "name": "keyword",
         "check": "String"
       }
