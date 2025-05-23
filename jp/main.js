@@ -67,8 +67,8 @@ document.getElementById('delete').addEventListener('change', function(event) {
 
 // ---------------------------------------
 
-// call step 1c
-workspace.registerButtonCallback("make_step1c", make_step1c);
+// check step 1b and call step 1c
+workspace.registerButtonCallback("checkStep1b", checkStep1b);
 
 // check step 1c
 workspace.registerButtonCallback("checkStep1c", checkStep1c);
