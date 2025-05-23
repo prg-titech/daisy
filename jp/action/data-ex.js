@@ -1,30 +1,25 @@
 var consList = [];
-var argList = [];
+var argLists = [];
 
 function make_step1c() {
     data_ex = "";
     template_ex = "";
 
-    // make sure that user define an approporiate data type
-    checkStep1b();
+    consList = [];
+    argLists = [];
 
     if (workspace.getBlocksByType("data_definition", false).length > 0) {
 
         var ex_block_n = 0;
-        // var consList = [];
+        // consList = [];
 
         // for cons_NoArg
         for (const consNoArgBlock of workspace.getBlocksByType("cons_noArg")) {
             var consNameBlock = consNoArgBlock.getInputTargetBlock("cons_name");
-
-            try {
-                var consName = consNameBlock.getFieldValue("keyword");
-            } catch (error) {
-                alert("コンストラクタに名前をつけましょう。")
-                return;
-            }
+            var consName = consNameBlock.getFieldValue("keyword");
 
             consList.push(consName);
+            argLists.push([]);
         
             // make data example block (red)
             build_dataExWithNoArg(ex_block_n, consName);
@@ -46,34 +41,23 @@ function make_step1c() {
         for (const consWithArgBlock of workspace.getBlocksByType("cons_withArg")) {
             // number of constructors that have arguments
             var consNameBlock = consWithArgBlock.getInputTargetBlock("cons_name");
-            try {
-                var consName = consNameBlock.getFieldValue("keyword");
-            } catch (error) {
-                alert("コンストラクタに名前をつけましょう。")
-                return;
-            }
+            var consName = consNameBlock.getFieldValue("keyword");
 
             consList.push(consName);
 
             // record arguments for each constructor
-            // var argList = [];
-
+            var argList = [];
             for (let i = 0; i < 10; i++) {
-                try {
-                    var argBlock = consWithArgBlock.getInputTargetBlock("ADD" + i);
-                    if (!argBlock) break;
-                } catch (error) {
-                    break;
-                }
-                try {
-                    var argNameBlock = argBlock.getInputTargetBlock("arg_name");
-                    var argName = argNameBlock.getFieldValue("keyword");
-                } catch (error) {
-                    alert("引数に名前をつけましょう。")
-                    return;
-                }
+                var argBlock = consWithArgBlock.getInputTargetBlock("ADD" + i);
+                if (!argBlock) break;
+
+                var argNameBlock = argBlock.getInputTargetBlock("arg_name");
+                var argName = argNameBlock.getFieldValue("keyword");
+
                 argList.push(argName);
             }
+
+            argLists.push(argList);
         
             // make data example block (red)
             build_dataExWithArg(ex_block_n, consName, argList);
