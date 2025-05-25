@@ -110,7 +110,7 @@ function checkStep1c() {
     // data_ex{n} has variable name
     for (const dataExBlock of dataExBlocks) {
         if (!dataExBlock.outputConnection || !dataExBlock.outputConnection.isConnected()) {
-            alert("変数名のないデータ例があります。データ例に変数名をつけましょう。");
+            alert("名前がないデータ例があります。データ例に名前をつけましょう。");
             return;
         }
     }
@@ -119,8 +119,8 @@ function checkStep1c() {
     for (const dataExampleBlock of workspace.getBlocksByType("data_example")) {
         // check if user put the variable name
         var variableName = dataExampleBlock.getFieldValue("variable");
-        if (variableName == "" || variableName == "(変数名)") {
-            alert("変数名をつけましょう。");
+        if (variableName == "" || variableName == "(データ型の名前)") {
+            alert("データ型に名前をつけましょう。");
             return;
         }
 

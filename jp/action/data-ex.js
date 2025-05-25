@@ -79,15 +79,15 @@ function make_step1c() {
             <sep gap="10"></sep>
             <button text="確認" callbackKey="checkStep1c"></button>
 
-            <label text="データ例に変数名をつけるため"></label>
+            <label text="名前付きデータ例"></label>
             <sep gap="0"></sep>
             <block type="data_example"></block>
             
-            <label text="引数の値"></label>
+            <label text="構成子の引数"></label>
             <sep gap="0"></sep>
             <block type="arg_value"></block>
             
-            <label text="データ型から作ったデータ例の雛形"></label>
+            <label text="データ例の雛形"></label>
             <sep gap="0"></sep>
         ` + data_ex;
         
