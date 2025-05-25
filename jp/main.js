@@ -1,3 +1,5 @@
+
+
 // create blockly workspace
 var workspace = Blockly.inject("blockly-editor", {
     toolbox: document.getElementById("toolbox"),
@@ -24,8 +26,11 @@ var workspace = Blockly.inject("blockly-editor", {
 });
 
 // keep the selected toolbox open when dragging blocks
-// workspace.getFlyout().autoClose = false;
-workspace.getToolbox().getFlyout().autoClose = false;
+workspace.getFlyout().autoClose = false;
+
+// workspace.getToolbox().getFlyout().autoClose = false;
+// Blockly.getMainWorkspace().getFlyout().autoClose = false;
+
 // workspace.toolbox_.flyout_.autoClose = false;
 
 

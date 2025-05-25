@@ -43,7 +43,7 @@ Blockly.defineBlocksWithJsonArray([{
       "type": "field_input",
       "name": "variable",
       "check": "String",
-      "text": "(変数名)",
+      "text": "(データ型の名前)",
     },
     {
       "type": "input_value",
@@ -125,7 +125,7 @@ function build_dataExWithArg(n, consName, argList) {
 
     // field for constructor name
     var consNameNum = 2 * (argList.length + 1) - 1;
-    message += `の持つ%${consNameNum}`;
+    message += `の%${consNameNum}`;
     arg.push({
         "type": "input_value",
         "name": "consName",
