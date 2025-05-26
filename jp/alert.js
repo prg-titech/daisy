@@ -127,9 +127,9 @@ function checkStep1c() {
     for (const dataExampleBlock of workspace.getBlocksByType("data_example")) {
         // check if user put the variable name
         var variableName = dataExampleBlock.getFieldValue("variable");
-        if (variableName == "" || variableName == "(データ型の名前)") {
+        if (variableName == "" || variableName == "(データ例の名前)") {
             blink(dataExampleBlock);
-            alert("データ型に名前をつけましょう。");
+            alert("データ例に名前をつけましょう。");
             return;
         }
 

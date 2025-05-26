@@ -43,7 +43,7 @@ Blockly.defineBlocksWithJsonArray([{
       "type": "field_input",
       "name": "variable",
       "check": "String",
-      "text": "(データ型の名前)",
+      "text": "(データ例の名前)",
     },
     {
       "type": "input_value",
