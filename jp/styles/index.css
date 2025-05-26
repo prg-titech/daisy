@@ -67,7 +67,8 @@ h1 {
   top: 0px;
   left: 450px;
   height: 100px; 
-  width: 710px; 
+  /* width: 710px;  */
+  width: 800px;
   background-color: rgb(255,255,255);
   overflow-y: auto;
   font-family: sans-serif; 

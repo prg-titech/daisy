@@ -1,21 +1,24 @@
 var timeoutID1 = "";
 var timeoutID2 = "";
 
-
-// TODO: blink function
+// blink function
 function blink(badBlock) {
     var i = 0;
-
-    for (i = 0; i < 10; i++) {
+    const blinkAux = function() {
         badBlock.select();
-        timeoutID1 = setTimeout(function() {badBlock.unselect();}, 200);
-        timeoutID2 = setTimeout(blink, 400);
+        timeoutID1 = setTimeout(function() {badBlock.unselect();}, 150);
+        timeoutID2 = setTimeout(blinkAux, 300);
         i++;
-        clearTimeout(timeoutID1)
-        clearTimeout(timeoutID2)
-        badBlock.unselect();
-    }
+        if (i > 5) {
+            clearTimeout(timeoutID1);
+            clearTimeout(timeoutID2);
+            badBlock.unselect();
+        }
+    };
+    blinkAux();
 };
+
+// ---------------
 
 function checkStep1b() {
     // check if user put the data type block
@@ -29,13 +32,15 @@ function checkStep1b() {
         // check if user put the data type name
         var dataTypeNameBlock = dataDefBlock.getInputTargetBlock("datatype_name");
         if (!dataTypeNameBlock) {
+            blink(dataDefBlock);
             alert("データ定義に名前をつけましょう。");
             return;
         }
         // check if user put the constructor block
         var constructorBlock = dataDefBlock.getInputTargetBlock("constructor");
         if (!constructorBlock) {
-            alert("データ定義のコンストラクタを作りましょう。");
+            blink(dataDefBlock);
+            alert("データ定義の構成子を作りましょう。");
             return;
         }
     }
@@ -46,7 +51,8 @@ function checkStep1b() {
         try {
             var consName = consNameBlock.getFieldValue("keyword");
         } catch (error) {
-            alert("コンストラクタに名前をつけましょう。")
+            blink(consNoArgBlock);
+            alert("構成子に名前をつけましょう。")
             return;
         }
     }
@@ -56,7 +62,8 @@ function checkStep1b() {
         try {
             var consName = consNameBlock.getFieldValue("keyword");
         } catch (error) {
-            alert("コンストラクタに名前をつけましょう。")
+            blink(consWithArgBlock);
+            alert("構成子に名前をつけましょう。")
             return;
         }
 
@@ -65,8 +72,6 @@ function checkStep1b() {
             var argBlock = consWithArgBlock.getInputTargetBlock("ADD" + i);
             // check if user put the argument block
             if (!argBlock) {
-                // alert("コンストラクタに必要な引数を追加しましょう。");
-                // return;
                 break;
             }
             // check argument's name
@@ -74,6 +79,7 @@ function checkStep1b() {
                 var argNameBlock = argBlock.getInputTargetBlock("arg_name");
                 var argName = argNameBlock.getFieldValue("keyword");
             } catch (error) {
+                blink(argBlock);
                 alert("引数に名前をつけましょう。")
                 return;
             }
@@ -83,6 +89,7 @@ function checkStep1b() {
                 var argDataType = argDataTypeBlock.getFieldValue("keyword");
             }
             catch (error) {
+                blink(argBlock);
                 alert("引数に適切なデータ型を付けましょう。")
                 return;
             }
@@ -110,6 +117,7 @@ function checkStep1c() {
     // data_ex{n} has variable name
     for (const dataExBlock of dataExBlocks) {
         if (!dataExBlock.outputConnection || !dataExBlock.outputConnection.isConnected()) {
+            blink(dataExBlock);
             alert("名前がないデータ例があります。データ例に名前をつけましょう。");
             return;
         }
@@ -120,12 +128,14 @@ function checkStep1c() {
         // check if user put the variable name
         var variableName = dataExampleBlock.getFieldValue("variable");
         if (variableName == "" || variableName == "(データ型の名前)") {
+            blink(dataExampleBlock);
             alert("データ型に名前をつけましょう。");
             return;
         }
 
         var dataExBlock = dataExampleBlock.getInputTargetBlock("data_ex");
         if (!dataExBlock) {
+            blink(dataExampleBlock);
             alert("「" + variableName + "」のデータ例を作りましょう。");
             return;
         }
@@ -140,10 +150,12 @@ function checkStep1c() {
             for (let j = 0; j < n_arg; j++) {
                 const arg = dataExBlock.getInputTargetBlock(`argValue${j}`);
                 if (!arg) {
+                    blink(dataExBlock);
                     alert(`「${consList[i]}」の引数「${argLists[i][j]}」の値はまだ空です。`);
                     return;
                 }
                 else if (arg.getFieldValue("arg_value") == "" || arg.getFieldValue("arg_value") == "(引数の値)") {
+                    blink(arg);
                     alert("「" + argLists[i][j] + "」の引数の値を付けましょう。");
                     return;
                 }
@@ -152,5 +164,5 @@ function checkStep1c() {
     }
 
     // alert for finishing the exercise
-    alert("データ型とデータ例の作成の作業が完成しました。お疲れ様でした！右上の「保存」ボタンを押して、ファイルを google form にアップロードしてください。");
+    alert("データ型とデータ例の作成の作業が完成しました。お疲れ様でした！\n画面のスクリーンショットを撮って、画像を google form にアップロードしてください。");
 }
