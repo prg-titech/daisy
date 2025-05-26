@@ -1,5 +1,3 @@
-
-
 // create blockly workspace
 var workspace = Blockly.inject("blockly-editor", {
     toolbox: document.getElementById("toolbox"),
@@ -28,6 +26,11 @@ var workspace = Blockly.inject("blockly-editor", {
 // keep the selected toolbox open when dragging blocks
 workspace.getFlyout().autoClose = false;
 
+// if (workspace.getToolbox() && workspace.getToolbox().getFlyout()) {
+//     workspace.getToolbox().getFlyout().autoClose = false;
+//   }
+
+// workspace.getToolbox().flyout_.autoClose = false;
 // workspace.getToolbox().getFlyout().autoClose = false;
 // Blockly.getMainWorkspace().getFlyout().autoClose = false;
 
@@ -97,8 +100,8 @@ workspace.registerButtonCallback('readme1a', readme1a);
 workspace.registerButtonCallback('readme1b', readme1b);
 workspace.registerButtonCallback('readme1c', readme1c);
 
-// download files
-function downloadFiles(content, fileName) {
+// download file
+function downloadFile(content, fileName) {
     const blob = new Blob([content], { type: 'text/plain' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -112,13 +115,53 @@ function downloadFiles(content, fileName) {
 
 // save button
 function saveAs(){
-    user = window.prompt("保存するファイル名を入力してください", "");
-      if(user != ""){
-      var xml = Blockly.Xml.workspaceToDom(workspace);
-      var myBlockXml = Blockly.Xml.domToText(xml);
-      downloadFiles(myBlockXml,user+".txt")
-    }
-  }
+    filename = window.prompt("保存するファイル名を入力してください", "");
+        if(filename != null && filename != ""){
+            // var xml = Blockly.Xml.workspaceToDom(workspace);
+            var workspaceXml = Blockly.Xml.workspaceToDom(workspace);
+            var toolboxXml = Blockly.Xml.toolboxToDom(workspace.getToolbox());
+
+            var myBlockXml = Blockly.Xml.domToText(workspaceXml);
+            var myToolboxXml = Blockly.Xml.domToText(toolboxXml);
+
+            // TODO: workspaceとtoolboxのxmlのつなぎ方を改善する
+            downloadFile(myBlockXml + myToolboxXml, filename + ".txt");
+        }
+}
+
+function load() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt';
+    
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const xmlText = e.target.result;
+                const xml = Blockly.utils.xml.textToDom(xmlText);
+                // TODO: parse the XML to separate workspace and toolbox
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, workspace);
+            };
+            reader.readAsText(file);
+        }
+    });
+    
+    fileInput.click();
+}
+
+// // save and load in local storage
+// function save() {
+//     const state = Blockly.serialization.workspaces.save(workspace);
+//     localStorage.setItem('workspace-state', JSON.stringify(state));
+// }
+
+// function load() {
+//     const jsonState = localStorage.getItem('workspace-state');
+//     const state = JSON.parse(jsonState);
+//     Blockly.serialization.workspaces.load(state, workspace);
+// }
 
 // ---------------------------------------
 
