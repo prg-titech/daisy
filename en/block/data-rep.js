@@ -21,6 +21,14 @@ Blockly.defineBlocksWithJsonArray([{
     "colour": 160,
   }]);
 
+Blockly.JavaScript["define_data"] = function (block) {
+    
+    let data_name = block.getFieldValue("define_dataName");
+    let cases = Blockly.JavaScript.statementToCode(block, "case")
+    let space_cut_cases = cases.replace(/  case/g, "case")
+    return "abstract class " +  data_name + "\n" + space_cut_cases;
+};
+
 // constructor with arguments (yellow)
 Blockly.defineBlocksWithJsonArray([{
     "type": "cons_withArg",
@@ -79,17 +87,60 @@ Blockly.defineBlocksWithJsonArray([{
         {
             "type": "input_value",
             "name": "datatype",
-            "check": ["keyword"]
+            "check": ["keyword", "primitive-data"]
         },
-        // {
-        //     "type": "input_value",
-        //     "name": "otherArg",
-        //     "check": ["argument"],
-        // }
     ],
     "output": "argument",
     "colour": 30,
     "inputsInline": true,
+}]);
+
+// primitive data type (blue)
+// string
+Blockly.defineBlocksWithJsonArray([{
+    "type": "pd-string",
+    "message0": 'String',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
+// int
+Blockly.defineBlocksWithJsonArray([{
+    "type": "pd-int",
+    "message0": 'Int',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
+// double
+Blockly.defineBlocksWithJsonArray([{
+    "type": "pd-double",
+    "message0": 'Double',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
+// boolean
+Blockly.defineBlocksWithJsonArray([{
+    "type": "pd-boolean",
+    "message0": 'Boolean',
+    "output": "primitive-data",
+    "colour": 220,
+}]);
+
+// primitive data type block
+Blockly.defineBlocksWithJsonArray([{
+    "type": "primitive-data",
+    "message0": '%1',
+    "args0": [
+        {
+          "type": "field_label",
+          "name": "primitive-data",
+          "check": "String"
+        }
+      ],
+    "output": "primitive-data",
+    "colour": 220,
 }]);
 
 //---------------------------------------

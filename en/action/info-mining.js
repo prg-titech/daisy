@@ -15,6 +15,7 @@ function addKeyword() {
         var span = document.createElement('keyword');
         span.style.backgroundColor = HIGHLIGHT_COLOR;
 
+        // 20250502: this try catch never works
         try {
             range.surroundContents(span);
         } catch (error) {
@@ -24,20 +25,28 @@ function addKeyword() {
 
         // make a block out of the keyword
         var selectedKeyword = selObj.toString();
-        newKeyword(selectedKeyword);
+        createKeyword(selectedKeyword);
+
+        // log
+        console.log("Keyword selected: ", selectedKeyword);
 
     } 
     // if no text selected
     else {
-        var keyword = prompt("Enter new keyword");
-        newKeyword(keyword);
+        var keyword = prompt("Insert the new keyword you want to add:");
+        createKeyword(keyword);
+        // log
+        console.log("Keyword added: ", keyword);
     }
 }
 
 // inesrt keyword to array and create block
-// 20250112 TODO: improve the function name
-function newKeyword(keyword) {
-    if (keyword != null && !existingKeywords.includes(keyword)) {
+function createKeyword(keyword) {
+    if (existingKeywords.includes(keyword)) {
+        alert("[Warning] The keyword \"" + keyword + "\" already exists.");
+    } else if (keyword == "" || keyword == null) {
+        alert("[Warning] Please enter a keyword.");
+    } else {
         // add keyword to the array
         existingKeywords.push(keyword);
 
@@ -54,12 +63,9 @@ function newKeyword(keyword) {
 
         workspace.updateToolbox(document.getElementById("toolbox"));
 
-        console.log("Keyword added:", keyword);
-        alert("Keyword \"" + keyword + "\" added");
+        alert("Added keyword \"" + keyword + "\".");
         updateDeleteKeyword();
 
-    } else {
-        alert("Keyword \"" + keyword + "\" already exists");
     }
 }
 
@@ -131,7 +137,7 @@ function deleteKeyword(keyword) {
         deleteAux("step1b", keyword);
 
         console.log("Keyword deleted:", keyword);
-        alert("Keyword \"" + keyword + "\" deleted");
+        alert("Deleted keyword \"" + keyword + "\".");
 
         updateDeleteKeyword();
     }

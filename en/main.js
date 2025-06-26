@@ -1,7 +1,7 @@
 // create blockly workspace
 var workspace = Blockly.inject("blockly-editor", {
     toolbox: document.getElementById("toolbox"),
-    scrollbars: false,
+    scrollbars: true,
     horizontalLayout: false,
     zoom: {
         controls: true,
@@ -18,9 +18,9 @@ var workspace = Blockly.inject("blockly-editor", {
         colour: "#ddd",
         snap: true
     },
-    tooloboxOptions: {
-        disableAutoClose: true,
-    },
+    // toolboxOptions: {
+    //     disableAutoClose: true,
+    // },
 });
 
 // keep the selected toolbox open when dragging blocks
@@ -63,6 +63,14 @@ document.getElementById('delete').addEventListener('change', function(event) {
 
 // ---------------------------------------
 
+// check step 1b and call step 1c
+workspace.registerButtonCallback("checkStep1b", checkStep1b);
+
+// check step 1c
+workspace.registerButtonCallback("checkStep1c", checkStep1c);
+
+// ---------------------------------------
+
 // README webpage
 function readme1a() {
     // window.location.href = 
@@ -80,7 +88,68 @@ workspace.registerButtonCallback('readme1a', readme1a);
 workspace.registerButtonCallback('readme1b', readme1b);
 workspace.registerButtonCallback('readme1c', readme1c);
 
+// download file
+function downloadFile(content, fileName) {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 
+// save button
+function saveAs(){
+    filename = window.prompt("Insert the file name:", "");
+        if(filename != null && filename != ""){
+            // var xml = Blockly.Xml.workspaceToDom(workspace);
+            var workspaceXml = Blockly.Xml.workspaceToDom(workspace);
+            var toolboxXml = Blockly.Xml.toolboxToDom(workspace.getToolbox());
+
+            var myBlockXml = Blockly.Xml.domToText(workspaceXml);
+            var myToolboxXml = Blockly.Xml.domToText(toolboxXml);
+
+            // TODO: workspaceとtoolboxのxmlのつなぎ方を改善する
+            downloadFile(myBlockXml + myToolboxXml, filename + ".txt");
+        }
+}
+
+function load() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.txt';
+    
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const xmlText = e.target.result;
+                const xml = Blockly.utils.xml.textToDom(xmlText);
+                // TODO: parse the XML to separate workspace and toolbox
+                Blockly.Xml.clearWorkspaceAndLoadFromXml(xml, workspace);
+            };
+            reader.readAsText(file);
+        }
+    });
+    
+    fileInput.click();
+}
+
+// // save and load in local storage
+// function save() {
+//     const state = Blockly.serialization.workspaces.save(workspace);
+//     localStorage.setItem('workspace-state', JSON.stringify(state));
+// }
+
+// function load() {
+//     const jsonState = localStorage.getItem('workspace-state');
+//     const state = JSON.parse(jsonState);
+//     Blockly.serialization.workspaces.load(state, workspace);
+// }
 
 // ---------------------------------------
 
