@@ -113,10 +113,12 @@ const textJoinMutator = {
         this.removeInput('EMPTY');
       }
       this.topInput_ = this.appendValueInput('ADD' + this.itemCount_)
+        .setCheck('argument')
         .appendField(createPlusField(), 'PLUS')
         // .appendField(Blockly.Msg['TEXT_JOIN_TITLE_CREATEWITH']);
     } else {
-      this.appendValueInput('ADD' + this.itemCount_);
+      this.appendValueInput('ADD' + this.itemCount_)
+        .setCheck('argument');
     }
     // Because item inputs are 0-index we decrement first, increment last.
     this.itemCount_++;
